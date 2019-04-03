@@ -34,7 +34,7 @@ Queen& Queen::operator=(const Queen& q)
 	return *this;
 }
 
-void _nQueen(vector<Queen> result, Queen& q, int n)
+void _nQueen(vector<Queen>& result, Queen& q, int n)
 {
 	if (q.x == 0 && q.y == n)
 		return;
