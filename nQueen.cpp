@@ -48,9 +48,17 @@ int nQueen(int n)
 	return number;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-	cout << nQueen(12) << endl;
+	if (argc >= 2)
+	{
+		int n = atoi(argv[1]); 
+		cout << nQueen(n) << endl;
+	}
+	else 
+	{
+		cout << nQueen(8) << endl;
+	}
 
 	return 0;
 }
