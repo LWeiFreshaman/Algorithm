@@ -16,6 +16,8 @@ struct Queen
 	int y;
 };
 
+vector<Queen> result;
+
 bool Queen::operator==(const Queen& q)
 {
 	return (q.x == x || q.y == y || abs(q.y - y) == abs(q.x - x));
@@ -34,7 +36,7 @@ Queen& Queen::operator=(const Queen& q)
 	return *this;
 }
 
-void _nQueen(vector<Queen>& result, Queen& q, int n)
+void _nQueen(Queen& q, int n)
 {
 	if (q.x == 0 && q.y == n)
 		return;
@@ -51,21 +53,22 @@ void _nQueen(vector<Queen>& result, Queen& q, int n)
 			break;
 		}
 	}
+	
 	if (q.y < n)
 	{
-		result.push_back(q);
-		if (result.size() == n)
+		if (result.size() + 1 == n)
 		{		
 			++number;
 			q = result.back();
 			++q.y;
 			result.pop_back();
-			_nQueen(result, q, n);
+			_nQueen(q, n);
 		}
 		else 
 		{
+			result.push_back(q);
 			++q.x; q.y = 0;
-			_nQueen(result, q, n);
+			_nQueen(q, n);
 		}
 	}
 	else
@@ -73,9 +76,8 @@ void _nQueen(vector<Queen>& result, Queen& q, int n)
 		q = result.back();
 		++q.y;
 		result.pop_back();
-		_nQueen(result, q, n);
+		_nQueen(q, n);
 	}
-
 }
 
 int nQueen(int n)
@@ -84,7 +86,7 @@ int nQueen(int n)
 	vector<Queen> result;
 	Queen q(0, 0);
 
-	_nQueen(result, q, n);
+	_nQueen(q, n);
 
 	return number;
 }
