@@ -82,6 +82,9 @@ void _nQueen(Queen& q, int n)
 
 int nQueen(int n)
 {
+	if (n < 2)
+		return 1;
+	
 	int i = 0;
 	vector<Queen> result;
 	Queen q(0, 0);
