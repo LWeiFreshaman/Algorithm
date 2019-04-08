@@ -25,6 +25,38 @@ vector<int> getNext(string s)
 	return next;
 }
 
+int find(string s, string p)
+{
+	int i = 0, j = 0;
+
+	vector<int> next = getNext(p);
+
+	while (i < s.length() && j < p.length())
+	{
+		if (s[i] == p[j])
+		{
+			++i;
+			++j;
+		}
+		else
+		{
+			if (next[j] == -1)
+			{
+				i++;
+				j = 0;
+			}
+			else 
+				j = next[j];
+		}
+	}
+
+	if (j == p.length())
+		return i - p.length();
+	else
+		return -1;
+}
+
+
 vector<int> getNext2(string ps)
 {
 	vector<int> next;
@@ -52,20 +84,11 @@ vector<int> getNext2(string ps)
 
 int main()
 {
-	string s;
+	string s, p;
 
-	while (cin >> s)
+	while (cin >> s >> p)
 	{
-		vector<int> next = getNext(s);
-		vector<int> next2 = getNext(s);
-
-		for (auto i : next)
-			cout << i << " ";
-		cout << endl;
-
-		for (auto i : next2)
-			cout << i << " ";
-		cout << endl;
+		cout << find(s, p) << endl;
 	}
 
 	return 0;
