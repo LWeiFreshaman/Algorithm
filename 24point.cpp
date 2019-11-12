@@ -5,7 +5,7 @@
 #include <cstdio>
 
 using namespace std;
-
+                                   
 vector<int> getNum(const string& s)
 {
     vector<int> result;
@@ -33,20 +33,20 @@ int calc(vector<int> nums, int a, int b, int c)
     if (nums.size() != 4)
         return 0;
 
-    stack<int> st;
-    st.push(nums[0]);
-    st.push(nums[1]);
-    st.push(nums[2]);
-    st.push(nums[3]);
+    stack<double> st;
+    st.push(static_cast<double>(nums[0]));
+    st.push(static_cast<double>(nums[1]));
+    st.push(static_cast<double>(nums[2]));
+    st.push(static_cast<double>(nums[3]));
 
-    vector<int> vec = {c, b, a};
+    vector<int> vec = {a, b, c};
 
     int i = 0;
     while (st.size() > 1)
     {
-        int tmp1 = st.top();
+        double tmp1 = st.top();
         st.pop();
-        int tmp2 = st.top();
+        double tmp2 = st.top();
         st.pop();
 
         if (vec[i] == 0)
@@ -65,6 +65,7 @@ int calc(vector<int> nums, int a, int b, int c)
         {
             st.push(tmp1 / tmp2);
         }
+        ++i;
     }
 
     return st.top();
@@ -80,7 +81,7 @@ bool judge(const vector<int>& nums)
             {
                 if (calc(nums, i, j, k) == 24)
                 {
-                    printf("%d%c%d%c%d%c%d=24", nums[0], ops[i], nums[1], ops[j], nums[2], ops[k], nums[3]);
+                    printf("%d%c%d%c%d%c%d=24\n", nums[3], ops[i], nums[2], ops[j], nums[1], ops[k], nums[0]);
 
                     return true;
                 }
